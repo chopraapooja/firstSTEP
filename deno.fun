@@ -1,1 +1,1 @@
-just my friends's funky name. His orignal name is vijay.
+just my friends's funky name.
