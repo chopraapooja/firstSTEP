@@ -45,7 +45,17 @@
 
 (reduce my-map-reducer-with-inc [] [1 2 3])
 
-(defn my-map-reducer [fn]
-  (fn [result el] (conj result (fn el))))
+(defn my-map-reducer [f]
+  (fn [result el] (conj result (f el))))
 
-(reduce (my-map-reducer dec) [1 2 3])
+(reduce (my-map-reducer dec) [] [1 2 3])
+
+;;---------------------------------------------
+;; filter as reduce function
+
+(defn my-filter-reducer [f]
+  (fn [result el] (if (f el)
+                    (conj result el)
+                    result)))
+
+(reduce (my-filter-reducer even?) [] (range 10))
