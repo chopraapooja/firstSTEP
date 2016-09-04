@@ -2,9 +2,9 @@
 
 (defn look [x] (prn x) x)
 
-;---------------------------------------------
-;BASIC VERSION
-;Map with append recursion
+;;---------------------------------------------
+;; BASIC VERSION
+;; Map with append recursion
 
 (defn my-map
   ([f coll]
@@ -23,8 +23,8 @@
 (my-map inc nil)
 
 
-;---------------------------------------------
-;Map with prepend recursion
+;;---------------------------------------------
+;; Map with prepend recursion
 
 (defn my-map [f coll]
   (if (seq coll)
@@ -36,3 +36,13 @@
 (my-map inc [])
 
 (my-map inc nil)
+
+;;---------------------------------------------
+;; my-map as reduce function
+
+(def f inc)
+
+(defn my-map-reducer [result el]
+  (conj result (f el)))
+
+(reduce my-map-reducer [] [1 2 3])
