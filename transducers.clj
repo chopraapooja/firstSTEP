@@ -59,3 +59,22 @@
                     result)))
 
 (reduce (my-filter-reducer even?) [] (range 10))
+
+;;---------------------------------------------
+;; more generic filter map
+(defn my-map-reducer [f]
+  (fn [reducer]
+    (fn [result el] (reducer result (f el)))))
+
+(defn my-filter-reducer [f]
+  (fn [reducer]
+    (fn [result el] (if (f el)
+                    (reducer result el)
+                    result))))
+
+(reduce ((my-map-reducer dec) conj) [] [1 2 3])
+(reduce ((my-map-reducer dec) +) 0 [1 2 3])
+
+(reduce ((my-filter-reducer even?) conj) [] (range 10))
+(reduce ((my-filter-reducer even?) +) 0 (range 10))
+;;---------------------------------------------
