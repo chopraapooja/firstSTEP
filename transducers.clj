@@ -77,4 +77,20 @@
 
 (reduce ((my-filter-reducer even?) conj) [] (range 10))
 (reduce ((my-filter-reducer even?) +) 0 (range 10))
+
 ;;---------------------------------------------
+;;
+;; reducing function
+;; operation
+;; powerful reducing function (because it performs operation while reducing)
+
+(def powerful-reducing-function ((my-filter-reducer even?) conj))
+(powerful-reducing-function [] 4)
+(powerful-reducing-function [2] 1)
+
+;; reducing funcions are composable
+(def powerful-reducing-function ((my-filter-reducer even?) conj))
+(def super-powerful-reducing-function ((my-map-reducer inc) powerful-reducing-function))
+
+(reduce powerful-reducing-function [] (range 10))
+(reduce super-powerful-reducing-function [] (range 10))
