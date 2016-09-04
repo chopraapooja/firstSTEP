@@ -7,7 +7,7 @@
    (my-map [] f coll))
   ([result f coll]
    (if (seq coll)
-    (apply-map (conj result (-> coll first f))
+    (my-map (conj result (-> coll first f))
                f
                (rest coll))
     result)))
