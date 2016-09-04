@@ -40,9 +40,12 @@
 ;;---------------------------------------------
 ;; my-map as reduce function
 
-(def f inc)
+(defn my-map-reducer-with-inc [result el]
+  (conj result (inc el)))
 
-(defn my-map-reducer [result el]
-  (conj result (f el)))
+(reduce my-map-reducer-with-inc [] [1 2 3])
 
-(reduce my-map-reducer [] [1 2 3])
+(defn my-map-reducer [fn]
+  (fn [result el] (conj result (fn el))))
+
+(reduce (my-map-reducer dec) [1 2 3])
